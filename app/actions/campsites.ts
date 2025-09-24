@@ -1,19 +1,10 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { createServerClient } from "@supabase/ssr";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
 export type CampsiteFormState = { ok: boolean; error?: string | null };
 
-async function getClient() {
-  const cookieStore = await  cookies();
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    { cookies: { get: (n: string) => cookieStore.get(n)?.value } }
-  );
-}
 
 /**
  * Upsert action:
@@ -24,7 +15,7 @@ export async function createCampsiteAction(
   _prev: CampsiteFormState,
   formData: FormData
 ): Promise<CampsiteFormState> {
-  const supabase = await getClient();
+  const supabase = await createSupabaseServerClient()
 
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { ok: false, error: "Please sign in." };
