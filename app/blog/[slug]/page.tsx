@@ -3,7 +3,7 @@ import { createSupabaseServerClient } from '@/lib/supabase/server'
 import type { Post } from '@/types/db'
 import DOMPurify from 'isomorphic-dompurify'
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
 
   const { slug } = await params; 
 
