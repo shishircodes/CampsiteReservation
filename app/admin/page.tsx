@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
-import { div } from 'motion/react-client'
 
 export const metadata = { title: 'Admin' }
 

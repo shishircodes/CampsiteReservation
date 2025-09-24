@@ -2,7 +2,7 @@
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 
-export async function signIn(formData: FormData): Promise<{ error?: string } | void> {
+export async function signIn(formData: FormData): Promise<void> {
   const email = String(formData.get('email') ?? '')
   const password = String(formData.get('password') ?? '')
   const supabase = await createSupabaseServerClient()
@@ -10,26 +10,22 @@ export async function signIn(formData: FormData): Promise<{ error?: string } | v
     // Attempt sign in
   const { error } = await supabase.auth.signInWithPassword({ email, password })
   if (error) {
-    return { error: error.message }
+    redirect('/')
   }
 
   
   // fetch the signed-in user
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) {
-    return { error: 'User not found after login' }
+    redirect('/')
   }
   
     // Fetch profile row for this user
-  const { data: profile, error: profileErr } = await supabase
+  const { data: profile} = await supabase
     .from('profiles')
     .select('role')
     .eq('id', user.id)   // now `user` is defined
     .maybeSingle()
-
-  if (profileErr) {
-    return { error: profileErr.message }
-  }
 
   // Redirect based on role
   if (profile?.role === 'staff' || profile?.role === 'admin') {
@@ -39,16 +35,16 @@ export async function signIn(formData: FormData): Promise<{ error?: string } | v
   }
 }
 
-export async function signUp(formData: FormData): Promise<{ error?: string; ok?: true }> {
+export async function signUp(formData: FormData): Promise<void> {
   const email = String(formData.get('email') ?? '')
   const password = String(formData.get('password') ?? '')
   const supabase = await createSupabaseServerClient()
 
   const { error } = await supabase.auth.signUp({ email, password })
   if (error) {
-    return { error: error.message }
+    redirect('/')
   }
-  return { ok: true }
+  redirect('/')
 }
 
 export async function signOut(): Promise<void> {
