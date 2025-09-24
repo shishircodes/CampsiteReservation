@@ -3,7 +3,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import Link from "next/link";
 import AddCampSiteForm from "@/components/AddCampSiteForm";
 
-export default async function EditCampsitePage({ params }: { params: { id: string } }) {
+export default async function EditCampsitePage({ params }: { params: Promise<{ id: string }> }) {
   
   const supabase = await createSupabaseServerClient()
 
