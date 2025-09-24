@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { @apply antialiased bg-white text-gray-900; }
+.container { @apply max-w-5xl mx-auto px-4; }
+.card { @apply border rounded-2xl p-4 border-gray-200; }
+.btn { @apply inline-flex items-center justify-center rounded-xl border border-gray-300 px-3 py-2 text-sm font-medium hover:bg-gray-50 transition; }
+.btn-primary { @apply bg-blue-600 text-white border-blue-600 hover:bg-blue-700; }
+.input, .textarea { @apply w-full rounded-xl border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500; }
+.textarea { @apply min-h-[180px]; }
