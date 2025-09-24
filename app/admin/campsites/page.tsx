@@ -1,14 +1,11 @@
 import { cookies } from "next/headers";
-import { createServerClient } from "@supabase/ssr";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 import Link from "next/link";
 
 export default async function CampsitesAdminPage() {
   const cookieStore = await cookies();
-  const supabase = await createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    { cookies: { get: (n: string) => cookieStore.get(n)?.value } }
-  );
+ 
+  const supabase = await createSupabaseServerClient()
 
   const { data: campsites } = await supabase
   .from("campsites")

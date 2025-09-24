@@ -1,23 +1,20 @@
 export const dynamic = "force-dynamic"; // avoid stale cache for SSR
-
-import { cookies } from "next/headers";
-import { createServerClient } from "@supabase/ssr";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 import Link from "next/link";
 import AddCampSiteForm from "@/components/AddCampSiteForm";
 
 export default async function EditCampsitePage({ params }: { params: { id: string } }) {
-  const cookieStore = await cookies();
-  const supabase = await createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    { cookies: { get: (n: string) => cookieStore.get(n)?.value } }
-  );
+  
+  const supabase = await createSupabaseServerClient()
+
+  const { id } = await params;
+ 
 
   // Fetch campsite (no nesting to keep it bulletproof)
   const { data: campsite, error } = await supabase
     .from("campsites")
     .select("id, name, description, base_price_cents, max_occupants, has_power, has_water, is_active")
-    .eq("id", params.id)
+    .eq("id", id)
     .maybeSingle();
 
   if (!campsite) {
@@ -38,7 +35,7 @@ export default async function EditCampsitePage({ params }: { params: { id: strin
   const { data: photos } = await supabase
     .from("campsite_photos")
     .select("id, url")
-    .eq("campsite_id", params.id)
+    .eq("campsite_id", id)
     .order("sort_order", { ascending: true })
     .order("created_at", { ascending: true });
 
