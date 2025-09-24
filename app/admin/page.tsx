@@ -10,24 +10,20 @@ export default async function AdminPage() {
 
   const supabase = await createSupabaseServerClient()
 
-    // fetch the signed-in user
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) {
-    return { error: 'User not found after login' }
-  }
-  
-    // Fetch profile row for this user
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/");
+
+  // Check role
   const { data: profile, error: profileErr } = await supabase
-    .from('profiles')
-    .select('role')
-    .eq('id', user.id)   // now `user` is defined
-    .maybeSingle()
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle();
 
-
-  // // Redirect to homepage if not admin
-  // if (profile?.role !== 'staff' || profile?.role !== 'admin') {
-  //   redirect('/')
-  // }
+  // If cannot read profile or not staff/admin → send home
+  if (profileErr || (profile?.role !== "admin" && profile?.role !== "staff")) {
+    redirect("/");
+  }
   
   redirect('/admin/campsites')
 
