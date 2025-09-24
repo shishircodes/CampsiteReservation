@@ -23,9 +23,6 @@ export default async function AdminPage() {
     .eq('id', user.id)   // now `user` is defined
     .maybeSingle()
 
-  if (profileErr) {
-    return { error: profileErr.message }
-  }
 
   // // Redirect to homepage if not admin
   // if (profile?.role !== 'staff' || profile?.role !== 'admin') {
