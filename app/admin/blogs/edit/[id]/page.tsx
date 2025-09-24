@@ -4,7 +4,7 @@ import { updatePost, deletePost } from '@/app/actions/posts'
 import type { Post } from '@/types/db'
 import Tiptap from '@/components/Tiptap'
 
-export default async function EditPostPage({ params }: { params: { id: string } }) {
+export default async function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
 
   const {id} = await params
 
