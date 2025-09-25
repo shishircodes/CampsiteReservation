@@ -93,10 +93,10 @@ export default function SignupPage() {
 
             <div className="grid grid-cols-2 gap-3">
               <button type="button" className="inline-flex items-center justify-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">
-                <span>🟢</span> Google
+                 Google
               </button>
               <button type="button" className="inline-flex items-center justify-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">
-                <span>📘</span> Facebook
+                 Facebook
               </button>
             </div>
 

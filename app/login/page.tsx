@@ -43,9 +43,9 @@ export default function LoginPage() {
 
           {/* Small stats row */}
           <div className="mt-6 flex flex-wrap items-center justify-center gap-6 lg:justify-start">
-            <Stat icon="📍" label="500+ Locations" />
+            <Stat icon="📍" label="50+ Locations" />
             <Stat icon="⭐" label="4.8/5 Rating" />
-            <Stat icon="⛺" label="50k+ Campers" />
+            <Stat icon="⛺" label="5k+ Campers" />
           </div>
         </section>
 
@@ -119,10 +119,10 @@ export default function LoginPage() {
 
             <div className="grid grid-cols-2 gap-3">
               <button type="button" className="inline-flex items-center justify-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">
-                <span>🟢</span> Google
+                 Google
               </button>
               <button type="button" className="inline-flex items-center justify-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">
-                <span>📘</span> Facebook
+                 Facebook
               </button>
             </div>
 
