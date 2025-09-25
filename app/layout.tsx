@@ -3,7 +3,7 @@ import Header from '@/components/Header'
 
 export const metadata = {
   title: 'Campsite Reservation - Start your camping journey',
-  description: 'SSR App with Tailwind, Supabase, and TypeScript',
+  description: 'Campsite Reservation App with Tailwind, Supabase, and TypeScript',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
