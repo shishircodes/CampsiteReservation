@@ -36,11 +36,18 @@ export async function signIn(formData: FormData): Promise<void> {
 }
 
 export async function signUp(formData: FormData): Promise<void> {
+  const full_name = String(formData.get('full_name') ?? '')
   const email = String(formData.get('email') ?? '')
   const password = String(formData.get('password') ?? '')
   const supabase = await createSupabaseServerClient()
 
-  const { error } = await supabase.auth.signUp({ email, password })
+  const { error } = await supabase.auth.signUp({ 
+    email, 
+    password,
+    options: {
+      data: { full_name: full_name },
+    }, 
+  })
   if (error) {
     redirect('/')
   }

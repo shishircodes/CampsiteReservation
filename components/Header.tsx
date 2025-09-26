@@ -9,13 +9,16 @@ export default async function Header() {
   const { data: { user } } = await supabase.auth.getUser();
 
   let role: string | null = null;
+  let full_name: string | null = null;
+
   if (user) {
     const { data: profile } = await supabase
       .from("profiles")
-      .select("role")
+      .select("role, full_name")
       .eq("id", user.id)
       .maybeSingle();
     role = profile?.role ?? null;
+    full_name = profile?.full_name ?? "User"
   }
 
 
@@ -34,6 +37,7 @@ export default async function Header() {
           </Link>
         )}
         <Link href='/campsites' className='text-sm text-gray-600 hover:text-gray-900'>Campsites</Link>
+        
           {user ? (
             <form action={signOut}>
               <button className="btn">Sign out</button>

@@ -1,4 +1,3 @@
-// components/CampsiteGrid.tsx
 import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
