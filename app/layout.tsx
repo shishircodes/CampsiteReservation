@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <Header />
-        <main className="container py-6">{children}</main>
+        <main className="mx-auto max-w-7xl">{children}</main>
       </body>
     </html>
   )

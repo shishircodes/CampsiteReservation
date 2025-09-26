@@ -4,7 +4,7 @@ export const metadata = { title: "Sign In" };
 
 export default function LoginPage() {
   return (
-    <main className="min-h-screen">
+    <main className="flex min-h-screen items-center justify-center">
       <div className="mx-auto grid max-w-10xl gap-10 px-6 py-12 lg:grid-cols-2 lg:items-center lg:gap-16">
         {/* Left / Marketing */}
         <section className="mx-auto max-w-2xl text-center lg:text-left">
