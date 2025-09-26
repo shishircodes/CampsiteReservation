@@ -23,7 +23,9 @@ export default async function Header() {
     <header className="border-b border-gray-200">
       <div className="container flex items-center gap-4 py-3">
         <Link href="/" className="font-semibold">Campsite Reservation</Link>
-        {user && (role === "admin" || role === "staff") && (
+        
+        <div className="ml-auto flex items-center gap-6">
+          {user && (role === "admin" || role === "staff") && (
           <Link
             href="/admin"
             className="text-sm text-gray-600 hover:text-gray-900"
@@ -31,7 +33,7 @@ export default async function Header() {
             Admin
           </Link>
         )}
-        <div className="ml-auto flex items-center gap-3">
+        <Link href='/campsites' className='text-sm text-gray-600 hover:text-gray-900'>Campsites</Link>
           {user ? (
             <form action={signOut}>
               <button className="btn">Sign out</button>
