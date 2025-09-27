@@ -11,6 +11,7 @@ type CampsiteForForm = {
   name?: string;
   description?: string | null;
   base_price_cents?: number | null;
+  available_slots?: number | null;
   max_occupants?: number | null;
   has_power?: boolean | null;
   has_water?: boolean | null;
@@ -165,7 +166,25 @@ export default function AddCampSiteForm({ campsite }: { campsite?: CampsiteForFo
             />
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium">Max Occupancy</label>
+  <label className="mb-1 block text-sm font-medium text-slate-700">
+    Available Slots (per night)
+  </label>
+  <input
+    type="number"
+    name="available_slots"
+    min={1}
+    defaultValue={campsite?.available_slots ?? "Not found"}
+    required
+    className="w-full rounded-lg border px-3 py-2 text-sm outline-none 
+               focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
+  />
+  <p className="mt-1 text-xs text-slate-500">
+    How many bookings are allowed per day for this campsite.
+  </p>
+</div>
+
+          <div>
+            <label className="mb-1 block text-sm font-medium">Max Occupancy (per slot)</label>
             <input
               name="max_occupants"
               type="number"

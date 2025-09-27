@@ -13,7 +13,7 @@ export default async function EditCampsitePage({ params }: { params: Promise<{ i
   // Fetch campsite (no nesting to keep it bulletproof)
   const { data: campsite, error } = await supabase
     .from("campsites")
-    .select("id, name, description, base_price_cents, max_occupants, has_power, has_water, is_active")
+    .select("id, name, description, base_price_cents,available_slots, max_occupants, has_power, has_water, is_active")
     .eq("id", id)
     .maybeSingle();
 

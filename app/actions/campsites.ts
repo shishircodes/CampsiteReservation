@@ -25,6 +25,7 @@ export async function createCampsiteAction(
   const name = String(formData.get("name") || "").trim();
   const description = String(formData.get("description") || "").trim();
   const nightly_rate = Number(formData.get("nightly_rate") || 0);
+  const available_slots = Number(formData.get("available_slots") ?? "1");
   const max_occupants = Number(formData.get("max_occupants") || 4);
   const has_power = formData.get("has_power") === "on";
   const has_water = formData.get("has_water") === "on";
@@ -42,6 +43,7 @@ export async function createCampsiteAction(
         name,
         description,
         base_price_cents: Math.round(nightly_rate * 100),
+        available_slots,
         max_occupants,
         has_power,
         has_water,
@@ -59,6 +61,7 @@ export async function createCampsiteAction(
         name,
         description,
         base_price_cents: Math.round(nightly_rate * 100),
+        available_slots,
         max_occupants,
         has_power,
         has_water,
