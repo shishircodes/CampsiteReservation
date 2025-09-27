@@ -37,6 +37,7 @@ export default async function Header() {
           </Link>
         )}
         <Link href='/campsites' className='text-sm text-gray-600 hover:text-gray-900'>Campsites</Link>
+        <Link href='/bookings' className='text-sm text-gray-600 hover:text-gray-900'>Bookings</Link>
         
           {user ? (
             <form action={signOut}>
