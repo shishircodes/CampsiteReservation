@@ -2,6 +2,8 @@
 import Link from "next/link";
 import CampsiteGrid from "@/components/CampsiteGrid";
 import Testimonial from "@/components/Testimonial";
+import { FiSearch } from "react-icons/fi";
+import { IoIosArrowForward } from "react-icons/io";
 
 export const metadata = { title: "Camp Site Reservation" };
 
@@ -21,17 +23,17 @@ export default function HomePage() {
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <Link
-                href="/search"
-                className="rounded-lg bg-white px-6 py-3 font-medium text-indigo-700 shadow hover:bg-indigo-50"
+                href="/campsites"
+                className="rounded-lg bg-white px-6 py-3 font-medium text-indigo-700 shadow hover:bg-indigo-50 flex items-center gap-1"
               >
-                🔍 Find Campsites
+                <FiSearch /> Find Campsites
               </Link>
-              <a
-                href="#intro-video"
-                className="rounded-lg border border-white/70 px-6 py-3 font-medium hover:bg-white/10"
+              <Link
+                href="/signup"
+                className="rounded-lg border border-white/70 px-6 py-3 font-medium hover:bg-white/10 flex items-center gap-1"
               >
-                ▶ Watch Video
-              </a>
+                <IoIosArrowForward /> Make Account
+              </Link>
             </div>
           </div>
         </div>

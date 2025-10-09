@@ -1,6 +1,7 @@
 // app/admin/bookings/page.tsx
 import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import DeleteBookingButton from "./DeleteBookingButton";
 
 export const dynamic = "force-dynamic";
 
@@ -155,6 +156,9 @@ export default async function AdminBookingsPage() {
                   </Td>
 
                   <Td>{formatMoney(b.total_price_cents)}</Td>
+                  <Td>
+  <DeleteBookingButton id={b.id} />
+</Td>
                 </tr>
               );
             })}
