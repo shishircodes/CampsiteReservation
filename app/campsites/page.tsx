@@ -31,8 +31,7 @@ export default async function CampsitesPage({
   // Filter by name/description (add `location` here too if you have that column)
   if (query) {
     db = db.or(`name.ilike.%${query}%,description.ilike.%${query}%`);
-    // If you added a `location` column:
-    // db = db.or(`name.ilike.%${query}%,description.ilike.%${query}%,location.ilike.%${query}%`);
+    db = db.or(`name.ilike.%${query}%,description.ilike.%${query}%,location.ilike.%${query}%`);
   }
 
   const { data, error } = await db;
