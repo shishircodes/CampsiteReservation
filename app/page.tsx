@@ -39,46 +39,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FLOATING SEARCH BAR */}
-      <section className="-mt-10 px-6">
-        <div className="mx-auto max-w-5xl rounded-xl bg-white p-6 shadow-xl">
-          <form action="/search" className="grid grid-cols-1 gap-4 sm:grid-cols-4">
-            <div>
-              <label className="mb-1 block text-sm text-slate-600">Location</label>
-              <input
-                name="q"
-                type="text"
-                placeholder="Where do you want to camp?"
-                className="w-full rounded-lg border px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
-              />
-            </div>
-            <div>
-              <label className="mb-1 block text-sm text-slate-600">Check-in</label>
-              <input
-                name="checkin"
-                type="date"
-                className="w-full rounded-lg border px-4 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
-              />
-            </div>
-            <div>
-              <label className="mb-1 block text-sm text-slate-600">Check-out</label>
-              <input
-                name="checkout"
-                type="date"
-                className="w-full rounded-lg border px-4 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
-              />
-            </div>
-            <div className="flex items-end">
-              <button
-                type="submit"
-                className="w-full rounded-lg bg-indigo-600 px-6 py-3 font-medium text-white shadow hover:bg-indigo-500"
-              >
-                Search
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
+     {/* FLOATING SEARCH BAR */}
+<section className="-mt-10 px-6">
+  <div className="mx-auto max-w-2xl rounded-xl bg-white p-6 shadow-xl">
+    <form
+      action="/campsites"
+      method="get"
+      className="grid grid-cols-1 gap-4 sm:grid-cols-[1fr_auto]"
+    >
+      <div>
+        <label className="mb-1 block text-sm text-slate-600">Find your ideal Campsite</label>
+        <input
+          name="q"
+          type="text"
+          placeholder="Search by location or campsite name..."
+          className="w-full rounded-lg border px-4 py-3 text-sm outline-none placeholder:text-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
+        />
+      </div>
+
+      <div className="flex items-end">
+        <button
+          type="submit"
+          className="w-full rounded-lg bg-indigo-600 px-6 py-3 font-medium text-white shadow hover:bg-indigo-500"
+        >
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
 
       {/* POPULAR CAMPSITES (live data) */}
       <CampsiteGrid
