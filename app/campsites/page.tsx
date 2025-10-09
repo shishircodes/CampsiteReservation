@@ -4,31 +4,43 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
+type SearchObj = Record<string, string | string[] | undefined>;
+
 export default async function CampsitesPage({
   searchParams,
 }: {
-  searchParams?: { q?: string };
+  // On Vercel, searchParams is a Promise (dynamic APIs as Promises)
+  searchParams: Promise<SearchObj>;
 }) {
-  const query = searchParams?.q?.trim().toLowerCase() || "";
+  const sp = await searchParams;
+  const rawQ = sp?.q;
+  const q = Array.isArray(rawQ) ? rawQ[0] : rawQ || "";
+  const query = q.trim().toLowerCase();
+
   const supabase = await createSupabaseServerClient();
 
-  // Fetch campsites
-  let dbQuery = supabase
+  // Base query
+  let db = supabase
     .from("campsites")
-    .select("id, name, description, base_price_cents, is_active, campsite_photos(url), location")
+    .select(
+      "id, name, description, base_price_cents, is_active, campsite_photos(url)"
+    )
     .eq("is_active", true)
     .order("created_at", { ascending: false });
 
+  // Filter by name/description (add `location` here too if you have that column)
   if (query) {
-    // Match name or location (you can add description too if needed)
-    dbQuery = dbQuery.or(`name.ilike.%${query}%,location.ilike.%${query}%`);
+    db = db.or(`name.ilike.%${query}%,description.ilike.%${query}%`);
+    // If you added a `location` column:
+    // db = db.or(`name.ilike.%${query}%,description.ilike.%${query}%,location.ilike.%${query}%`);
   }
 
-  const { data: campsites, error } = await dbQuery;
+  const { data, error } = await db;
 
   if (error) {
     return (
       <main className="mx-auto max-w-6xl px-6 py-12">
+        <h1 className="text-2xl font-semibold mb-6">All Campsites</h1>
         <p className="text-red-600">Error loading campsites: {error.message}</p>
       </main>
     );
@@ -41,11 +53,9 @@ export default async function CampsitesPage({
       </h1>
 
       <CampsiteGrid
-        limit={9999} // show all matching campsites
-        title={undefined}
-        subtitle={undefined}
+        limit={9999}
         className="pt-0"
-        initialData={campsites}
+        initialData={data ?? []}
       />
     </main>
   );
